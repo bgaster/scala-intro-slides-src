@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Introduction</title>
+    
+    <meta name="description" content="Introduction to Scala for new programmers">
+    <meta name="author" content="Benedict R. Gaster">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+    <link rel="stylesheet" href="resources/template.css" id="template">
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    
+    <!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+  </head>
+  
+  <body>
+    
+    <div class="reveal">
+      
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section data-state="uwe-front-matter">
+	  <h1>Scala</h1>
+	  <h3>A functional and object-oriented programming language</h3>
+	  <p>
+	    <small><a href="http://benedict.gaster.org">Benedict R. Gaster</a> / <a href="http://twitter.com/cuberoo_">@cuberoo_</a></small>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Computer Programming</h2>
+	  <p>
+	    Provide instructions so computer can peform tasks
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Computer Programming</h2>
+	  <p>
+	    Prepackged software provides fixed solution, e.g.: 
+	    <center><img width="400" height="300" src="./resources/evernote-screenshot.png" alt="Evernote"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Computer Programming</h2>
+	  <p>
+	    <ul>
+	      <li> Allows <font color="green">you</font> to write the software </li>
+	      <li> Allows <font color="green">you</font> to tell the computer what to do </li>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Machine Languages</h2>
+	  <p>
+	    <ul>
+	      <li>Low-level</li>
+	      <li>Verbose</li>
+	      <li>Prone to errors</li>
+	    </ul>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Natural Languages</h2>
+	  <p>
+	    <ul>
+	      <li>Examples include  English and French
+   	      <li>Ambigious and hard for computer to process</li>
+	      <ul>
+		<li>"The peasants are revolting" (http://simple.wikipedia.org/wiki/Ambiguity)</li>
+	      </ul>
+	      </li>
+	    </ul>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>High-level Languages</h2>
+	  <p>
+	    A middle ground
+	  </p>
+	</section>
+	
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Programming</h2>
+	  <p>
+	      Fun, creative, and satisfying
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Programming</h2>
+	  <p>
+	    Enables real world interaction with huge number of
+	    <ul>
+	      <li>devices, e.g. smartphones, desktop computers, ...</li>
+	      <li>sensors</li>
+	      <li>controllers</li>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Programming</h2>
+	  <p>
+	    <ul>
+	      <li>Found in all walks of life</li>
+	      <li>not only computer scientists write computer programs</li>
+	    </ul>
+	  </p>
+	</section>
+	
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Begin Programming</h2>
+	  <p>
+	      First off, one must learn a programming language
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Which programming language?</h2>
+	  <p>
+	    <center><img width="400" height="300" src="./resources/progLanguages.jpg" alt="Programming Languages"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Know Many Programming Languages</h2>
+	  <p>
+	    Most "real" projects use multiple languages
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>For This Course</h2>
+	  <p>
+	    <center><img width="635" height="282" src="./resources/scala.gif" alt="Scala"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Why Scala?</h2>
+	  <p>
+	    <ul>
+	      <li>Scala is object-oriented---every value is an object </li>
+	      <li>Scala is an functional---every function is a value </li>
+	      <li>Scala is statically typed---helps catch errors early</li>
+	      <li>Scala is based on the Java Virtual Machine (JVM)
+		<ul>
+		  Fully compatable with Java!
+		</ul>
+	      </li>
+	    </ul>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Why Scala?</h2>
+	  <p>
+	    Widely used, e.g. the web application library Scalatra used by:
+	    <ul>
+	      <li>BBC</li>
+	      <li>Netflix</li>
+	      <li>Guardian News Paper</li>
+	    </ul>
+	  </p>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Setup</h2>
+	  <p>
+	    <ul>
+	      <li>Main website: <a href="http://www.scala-lang.org/">http://www.scala-lang.org/</a></li>
+	      <li>Download and install Scala 2.11.5 binaries for your system
+	      <li>You will need a text editor (e.g. edit, vi, emacs, ...)
+		<ul>
+		  <li>We will look at Intergrated Development Environments (IDE) later
+		</ul>
+	      </li>
+	    </ul>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Playing with Scala</h2>
+	  <p>
+	    <ul>
+	      <li>The Scala tools provides a wide selection of utilites for developing Scala progams</li>
+	      <li>The command tool <font color="green">scala</font>, a Read–eval–print loop (REPL) tool, allows interactive development of programs</li>
+	      <li>Great for learning to program or a new language</li>
+	    </ul>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Playing with Scala</h2>
+	  <p>
+	    <center><img width="600" height="400" src="./resources/scala-example-interpreter.png" alt="Scala Example"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Hello World</h2>
+	  <p>
+	    Create a program by typing it into text editor, call it <font color="blue">HelloWorld.scala</font>
+	    <pre><code class="scala" data-trim contenteditable>
+object HelloWorld {
+   def main(args: Array[String]) {
+      println("Hello, World!")
+   }
+}
+	  </code></pre>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Running Hello World</h2>
+	  <p>
+	    <center><img width="600" height="400" src="./resources/scala-hello-world.png" alt="Scala Example"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Scala Compiliation Flow</h2>
+	  <p>
+	    <center><img width="600" height="400" src="./resources/scala-compiler-flow.png" alt="Scala Example"></center>
+	  </p>
+	</section>
+
+
+	<section data-state="uwe-background-matter">
+	  <h2>SBT - The Interactive Build</h2>
+	  <p>
+	  </p>
+	</section>
+	
+      </div>
+      
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+
+      <script>
+	
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
+	
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+	
+	// Optional reveal.js plugins
+	dependencies: [
+	{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+	{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+	{ src: 'plugin/zoom-js/zoom.js', async: true },
+	{ src: 'plugin/notes/notes.js', async: true }
+	]
+	});
+	
+      </script>
+    </div>
+  </body>
+</html>

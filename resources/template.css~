@@ -1,0 +1,5 @@
+html.intro body {
+	background:url("./resources/scala.gif");
+	background-position:center;
+	background-size: 100%;
+}
