@@ -124,6 +124,13 @@
 	</section>
 
 	<section data-state="uwe-background-matter">
+	  <h2>Programmable Devices</h2>
+	  <p>
+	    <center><img width="650" height="450" src="./resources/programmable-devices.png" alt="Programmable Devices"></center>
+	  </p>
+	</section>
+	
+	<section data-state="uwe-background-matter">
 	  <h2>Programming</h2>
 	  <p>
 	    <ul>
@@ -251,11 +258,171 @@ object HelloWorld {
 	  </p>
 	</section>
 
+	<section>
+	  <section data-state="uwe-background-matter">
+	    <h2>SBT - The Interactive Build</h2>
+	    <ul>
+	      <li>Tool to build Scala applications</li>
+	      <li>Interative</li>
+	      <li>Extendable</li>
+	      <li>Simple</li>
+	    </ul>
+	  </section>
+	  
+	  <section  data-state="uwe-background-matter">
+	    <h2>SBT - Setup</h2>
+	    <p>
+	      <ul>
+		<li>Main website: <a href="http://www.scala-sbt.org/">http://www.scala-sbt.org/</a></li>
+		<li>Download and install SBT binaries for your system</li>
+		<li>Again you will need a text editor (e.g. edit, vi, emacs, ...)</li>
+	      </ul>
+	    </p>
+	  </section>
 
-	<section data-state="uwe-background-matter">
-	  <h2>SBT - The Interactive Build</h2>
-	  <p>
-	  </p>
+	  
+	  <section data-state="uwe-background-matter">
+	    <h2>Basic SBT - Hello World Again</h2>
+	    <ul>
+	      <li>Change to directory with HelloWorld.scala</li>
+	      <li>Run the command <font color="green">sbt</font> and then the command <font color="green">run</font></li>
+	    </ul>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Basic SBT - Hello World Again</h2>
+	    <p>
+	      <center><img width="600" height="400" src="./resources/basic-sbt.png" alt="Basic SBT Example"></center>
+	    </p>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Basic SBT</h2>
+	    <ul>
+	      <li>Standard convention
+		<ul>
+		  <li>Sources in the base directory (not really a good idea)</li>
+		  <li>Sources in src/main/scala or src/main/java</li>
+		</ul>
+	      </li>
+	    </ul>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Build Definition File</h2>
+	    <ul>
+	      <li>Most projects require some manual setup</li>
+	      <li>Basic build settings go in <font color="green">build.sbt</font> in project root</li>
+	    </ul>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Exmaple Build Definition File</h2>
+	  <pre><code class="scala" data-trim contenteditable>
+lazy val root = (project in file(".")).
+  settings(
+    name              := "helloworld",
+    version           := "1.0",
+    scalaVersion      := "2.11.5",
+    organization      := "com.bendict.gaster",
+  )
+	 </code></pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Project Directory structure</h2>
+	    <pre>
+src/
+  main/
+    resources/
+     files to include in main jar here
+  scala/
+     main Scala sources
+  java/
+     main Java sources
+  test/
+     resources
+        files to include in test jar here
+     scala/
+        test Scala sources
+     java/
+        test Java sources
+	    </pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Basic Commands (interactive)</h2>
+	    <ul>
+	      <li><font color="green">compile</font> - complies application</li>
+	      <li><font color="green">run</font> - run application</li>
+	      <li><font color="green">Ctrl-D</font> (Unix/Max) - exit SBT</li>
+	      <li><font color="green">Ctrl-Z</font> (Windows) - exit SBT</li> 
+	    </ul>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Flatten Class Files</h2>
+	    <ul>
+	      <li>Standard Scala Class File cannot run with
+		<font color="green"> java</font></li>
+	      <li>Use SBT plugin <font color="green"> assembler</font> to address this</li>
+	    </ul>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Assembler Plugin</h2>
+	    <ul>
+	      <li>Create directory <font color="green">project</font> in root</li>
+	      <li>Create file <font color="green">project/project/assembly.sbt</font></li>
+	      <li>Open and add the following:</li>
+	    </ul>
+	    <pre>
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.12.0")
+	    </pre>
+	    <ul>
+	      <li>Now you have the new SBT command <font color="green">assembly</font></li>
+	      <li>Try It!</li>
+	    </ul>
+	  </section>
+
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Assembler Plugin</h2>
+	    <ul>
+	      <li>SBT builds into direcotry <font color="green">./target/scala-2.11</font></li>
+	      <li>To run resulting JAR file:
+	    </ul>
+	    <pre>
+java -cp $SCALA_HOME/lib/scala-library.jar -jar helloworld-assembly-1.0.jar 
+	    </pre>
+	  </section>
+	</section>
+
+	<section>
+	  <section data-state="uwe-background-matter">
+	    <h2>Scala Introduction Repository</h2>
+	    <ul>
+	      <li>A small but growing set of examples can be found here:
+		<ul>
+		  <li><a href="https://github.com/bgaster/scala-intro">https://github.com/bgaster/scala-intro</a></li>
+		  <li>Try and have these all build and running by next week</li>
+		</ul>
+	      </li>
+	    </ul>
+	  </section>
+	</section>
+
+	
+	<section>
+	  <section data-state="uwe-background-matter">
+	    <h2>Further Reading tutorials</h2>
+	    <p>Try to complete at least these two before next week</p>
+	    <ul>
+	      <li><a href="http://scalatutorials.com/tour/">http://scalatutorials.com/tour/</a></li>
+	      <li><a href="http://www.scala-sbt.org/0.13/tutorial/sbt-tutorial.pdf">http://www.scala-sbt.org/0.13/tutorial/sbt-tutorial.pdf</a></li>
+	      <li>Many more online</li>
+	    </ul>
+	  </section>
 	</section>
 	
       </div>

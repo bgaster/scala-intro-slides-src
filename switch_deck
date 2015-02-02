@@ -1,0 +1,7 @@
+#!/bin/bash  
+
+if [ -a "index.html" ]
+then
+  rm index.html
+fi
+ln -s $1 index.html
