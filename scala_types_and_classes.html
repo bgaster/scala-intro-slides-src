@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Introduction</title>
+    
+    <meta name="description" content="Introduction to Scala for new programmers">
+    <meta name="author" content="Benedict R. Gaster">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+    <link rel="stylesheet" href="resources/template.css" id="template">
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    
+    <!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+  </head>
+  
+  <body>
+    
+    <div class="reveal">
+      
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section data-state="uwe-front-matter">
+	  <h1>Types, Values, and Control Flow</h1>
+	  <p>
+	    <small><a href="http://benedict.gaster.org">Benedict R. Gaster</a> / <a href="http://twitter.com/cuberoo_">@cuberoo_</a></small>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Types</h2>
+	  <p> A type is a collection of releated things, often called values </p>
+	  <table>
+	      <thead>
+		<tr>
+		  <th>Name</th>
+		  <th>Sets of values</th>
+		  <th>Literal values</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Char</td>
+		  <td>characters</td>
+		  <td>'Z', '#'</td>
+		<tr>
+		<tr>
+		  <td>Int</td>
+		  <td>integers</td>
+		  <td>1, 2, 3</td>
+		<tr>
+		<tr>
+		  <td>String</td>
+		  <td>sequence of characters</td>
+		  <td>"hello, world"</td>
+		<tr>		  
+		<tr>
+		  <td>Double</td>
+		  <td>floating point numbers</td>
+		  <td>2.34, 0.22e23, </td>
+		<tr>		  
+	      </tbody>
+	  </table>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  
+	  <section data-state="uwe-background-matter">
+	    <h2>Definitions</h2>
+	    <ul>
+	      <li>A variable is a name that refers to a thing</li>
+	      <li>A value is a name that refers to a thing too! </li>
+	      <li>The difference is that variables are mutable while values are immutable</li>
+	    </ul>
+	    <p>
+	      <pre><code class="scala" data-trim contenteditable>
+var x = 100 // mutable, i.e. can change later
+val y = 100 // immutable, i.e. never changes	      
+	      </code></pre>
+	    </p>
+	  </section>	
+	  
+	  <section data-state="uwe-background-matter">
+	    <h2>Try it out</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/val_vars_scala.png" alt="Values and Variables"></center>
+	    </p>
+	  </section>
+	  
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Types Again</h2>
+	  <ul>
+	    <li>In Scala all values have a type
+	      <ul><li>although you do not always need to write it down</li></ul>
+	    </li>
+	    <li>
+	      If an expression, <font color="green"> e</font>,
+	      evaluates to a value of type <font color="green">T</font>,
+	      then <font color="green"> e </font> has type <font color="green">T</font>, written
+	      <font color="green">e : T</font>
+	    </li>
+	    <li>All correct (i.e. well-formed) expressions have a
+	    type, which can, often, be infered by the compiler.</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  
+	  <section data-state="uwe-background-matter">
+	    <h2>Lists</h2>
+	    <p>A list is a sequence of things of the same type:</p>
+	    <pre>
+	      <code class="scala" data-trim contenteditabl>
+List(10,20,30,40,50,60,60) : List[Int]
+List("Hello", "World!") : List[String]
+	      </code>
+	    </pre>
+	    <p>In general List[T] is a list of things of type T
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>More on List Types</h2>
+	    <p>The type of a list says nothing about its length</p>
+	    <pre>
+	      <code class="scala" data-trim contenteditabl>
+List(10,20) : List[Int]
+List(20,30,40,50,60) : List[Int]
+	      </code>
+	    </pre>
+	    <p>Both have type List[Int] but
+	    <pre>
+	      <code class="scala" data-trim contenteditabl>
+List(10,20).length == 2
+List(20,30,40,50,60).length == 5
+	      </code>
+	    </pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Some List methods</h2>
+	    <p>Numerous predefined <font color="green">methods</font></p>
+	    <table>
+	      <thead>
+		<tr>
+		  <th>What it is</th>
+		  <th>What it does</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td><pre><code>List() or Nil </pre></code></td>
+		  <td>Empty List</td>
+		<tr>
+		<tr>
+		  <td><pre><code>val cl = 'a' :: 'b' :: Nil     </pre></code></td>
+		  <td>Creates a new list with values 'a' and 'b'</td>
+		<tr>
+		<tr>
+		  <td><pre><code>cl:::List('c','d') </pre></code></td>
+		  <td>Concatenates two lists, giving List('a','b','c','d')</td>
+		<tr>
+		<tr>
+		  <td><pre><code>cl.head </pre></code></td>
+		  <td>Returns the first element of a list (in this case 'a')</td>
+		<tr>		  
+	      </tbody>
+	    </table>
+	  </section>	  
+	</section>
+
+	<section data-state="uwe-background-matter">	  
+	  <section data-state="uwe-background-matter">
+	    <h2>Tuples</h2>
+	    <p>A tuple is a sequence of things of the different type:</p>
+	    <pre>
+	      <code class="scala" data-trim contenteditabl>
+(10,'a',"hello") : (Int,Char,String)
+('1') : (Int)
+("first", List(10,20)) : (String, List[Int])
+	      </code>
+	    </pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>More on Tuples</h2>
+	    <p>The type of a tuple encodes its length</p>
+	    <pre>
+	      <code class="scala" data-trim contenteditabl>
+(10,'a') : (Int,Char)
+('a', 'b') : (Char,Char)
+	      </code>
+	    </pre>
+	    <p>have different types but have the same length</p>
+	  </section>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <section data-state="uwe-background-matter">
+	    <h2>Functions</h2>
+	    <p>
+	      In mathematics a function is
+	      a <font color="green">relation</font> between a set of
+	      inputs and a set of valid outputs
+	    </p>
+	    <p>You might remember some from school, e.g.</p>
+	    <p>f(x) = x<sup>2</sup></p>
+	    <p>defines a function from the set of integers to the set of integers, whose value is the square of its input</p>
+	  </section>
+	  
+	  <section data-state="uwe-background-matter">
+	    <h2>Scala Functions</h2>
+	    <p>
+	      In Scala a function is a <font color="green">relation</font> between a tuple of inputs
+	      and a thing, which might be a tuple but can be other things two.
+	    </p>
+	    <p>Returning to our function for squaring integers</p>
+	    <pre>
+	      <code class="scala">
+def f(x : Int) : Int = {
+   x * x
+}
+	      </code>
+	    </pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Scala Functions</h2>
+	    <p>
+	      In general, we should give our functions meaningful names
+	    </p>
+	    <pre>
+	      <code class="scala">
+def square(x : Int) : Int = {
+   x * x
+}
+	      </code>
+	    </pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Scala Functions</h2>
+	    <p>
+	      <center><img width="600" height="500" src="./resources/function-def-form.png" alt="Basic form of functions"></center>
+	    </p>	    
+	  </section>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Control Flow</h2>
+	  <ul>
+	    <li>Sequence of statements that are actually executed in a program</li>
+	    <li>Conditionals and loops, enable us to choreograph control flow</li>
+	  </ul>
+	  <p>
+	    <center><img width="500" height="300" src="./resources/basic-control-flow.png" alt="Basic form of functions"></center>
+	  </p>	    
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <section data-state="uwe-background-matter">
+	    <h2>Conditionals</h2>
+	    <p>
+	      <center><img width="700" height="550" src="./resources/True-False.gif" alt="True or False"></center>
+	    </p>	    
+	  </section>
+	    
+	  <section data-state="uwe-background-matter">
+	    <h2>If-then-else</h2>
+	    <p>The if statement is a form of branching</p>
+	    <ul>
+	      <li>Evaluate a boolean expression
+		<ul>
+		  <li>If true, then execute some statements</li>
+		  <li>If false, then execute some other statements</li>
+		</ul>
+	      </li>
+	    </ul>
+	    <pre>
+	      <code class="scala">
+if (boolean expression) {
+   statement_i
+}
+else {
+   statement_j
+}
+	      </code>
+	    </pre>	    
+	  </section>
+	    
+	  <section data-state="uwe-background-matter">
+	    <h2>Example (is even)</h2>
+	    <pre>
+	      <code class="scala">
+def isEven( x : Int ) : Bool = {
+   if (x % 2 == 0) { // % returns the remainder of an integer division
+      true
+   }
+   else {
+     false
+   }
+}
+	      </code>
+	    </pre>
+	  </section>
+	    
+	  <section data-state="uwe-background-matter">
+	    <h2>Example (maximum)</h2>
+	    <pre>
+	      <code class="scala">
+def max( x : Int, y : Int ) : Int = {
+   if (x > y) {
+      x
+   }
+   else {
+     y
+   }
+}
+              </code>
+	    </pre>
+           </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Example (is even, again)</h2>
+	    <p>We could have defined isEven as
+	    <pre>
+	      <code class="scala">
+def isEven( x : Int ) : Bool = {
+   (x % 2 == 0) 
+}
+              </code>
+	    </pre>
+	    <p>Can you tell me why?</p>
+	  </section>
+
+        </section>
+
+        <section data-state="uwe-background-matter">
+	  <section data-state="uwe-background-matter">
+	    <h2>Loops</h2>
+	    <p>
+	      <center><img width="700" height="550" src="./resources/while-loop.jpg" alt="While Loop"></center>
+	    </p>	    
+	  </section>
+	  
+	  <section data-state="uwe-background-matter">
+	    <h2>While Loop</h2>
+	    <p>The while loop is a common repetition structure</p>
+	    <ul>
+	      <li>Evaluate a boolean expression
+		<ul>
+		  <li>If true, then execute some statements</li>
+		  <li>Repeat</li>
+		</ul>
+	      </li>
+	    </ul>
+	    <pre>
+	      <code class="scala">
+while (boolean expression) {
+   statement 1
+   ...
+   statement n
+}
+	      </code>
+	    </pre>	    
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Example (gcd)</h2>
+	    <pre>
+	      <code class="scala">
+def gcd( x : Long, y : Long ) : Long = {
+   var a = x
+   var b = y
+   while (a != 0) {
+      val temp = a
+      a = b % a
+      b = temp
+   }
+   b
+}
+	      </code>
+	    </pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Example (sum elemnts of list)</h2>
+	    <pre>
+	      <code class="scala">
+def sumList( xs : List[Int] ) : Int = {
+   var sum = 0
+   var ts  = xs
+   while (ts.length > 0) {
+       sum = sum + ts.head
+       ts  = ts.tail
+   }
+   sum
+}
+	      </code>
+	    </pre>
+	  </section>	  
+
+	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <section data-state="uwe-background-matter">
+	    <h2>Iteration</h2>
+	    <ul>
+	      <li>
+		repetition of a mathematical or computational
+	      procedure applied to the result of a previous
+	      application, typically as a means of obtaining
+	      successively closer approximations to the solution of a
+	      problem
+	      </li>
+	    </ul>
+	  </section>	  
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Iteration in Scala</h2>
+	    <ul>
+	      <li>While loops</li>
+	      <li>For loops</li>
+	      <li>Recursion loops</li>
+	      <li>Container functions, e.g. sum all elements of list</li>
+	    </ul>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Example (sum elements of list)</h2>
+	    <pre>
+	      <code class="scala">
+def sumList( xs : List[Int] ) : Int = {
+   xs.sum
+}
+	      </code>
+	    </pre>
+
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Scala For loops</h2>
+	    <p>A for loop is another common repetition structure</p>
+	    <ul>
+	      <li>Iterate over a range</li>
+	      <li>Most basic example is over a range of integers</li>
+	      <li>More generally applies to any collection type, e.g. lists</li>
+	    </ul>
+	    <pre>
+	      <code class="scala">
+for (i <- 1 to 4)                      for (i <- 1 until 4)
+   println("Iteration " + i)               println("Iteration " + i)
+
+Iteration 1                            Iteration 1
+Iteration 2                            Iteration 2
+Iteration 3                            Iteration 3
+Iteration 4
+	      </code>
+	    </pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Example (sum elements of list again)</h2>
+	    <pre>
+	      <code class="scala">
+def sumList( xs : List[Int] ) : Int = {
+   var sum = 0		
+   for (i <- xs) {
+      sum = sum + i
+   }
+   sum	  
+}
+
+sumList(List(1,2,4,5))
+res17: Int = 12	     
+	     </code>
+	    </pre>
+	  </section>
+
+	  <section data-state="uwe-background-matter">
+	    <h2>Example (sum elements of list again)</h2>
+	    <p>Filter elements using a predicate</p>
+	    <pre>
+	      <code class="scala">
+def sumEvensList( xs : List[Int] ) : Int = {
+   var sum = 0		
+   for (i <- xs if isEven(i))
+      sum = sum + i
+   sum	  
+}
+
+sumEvensList(List(1,2,4,5))
+res17: Int = 6	     
+	      </code>
+	    </pre>
+
+	  </section>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Control Flow Summary</h2>
+	  <ul>
+	    <li>Sequence of statements that are actually executed in a program</li>
+	    <li>Conditionals and loops enable us to choreograph the control flow</li>
+	  </ul>
+	  <table>
+	    <thead>
+	      <tr>
+		<th>Control Flow</th>
+		<th>Description</th>
+		<th>Example</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<td>straight-line programs</td>
+		<td>all statements are executed in order</td>
+		<td></td>
+	      <tr>
+	      <tr>
+		<td>conditionals</td>
+		<td>some statements are executed depending on conditions</td>
+		<td>if-else</td>
+	      <tr>
+	      <tr>
+		<td>loops</td>
+		<td>some statements are executed repeatly on conditions</td>
+		<td>while for</td>
+	      <tr>		  
+	    </tbody>
+	  </table>
+	</section>
+	
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+
+      <script>
+	
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
+	
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+	
+	// Optional reveal.js plugins
+	dependencies: [
+	{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+	{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+	{ src: 'plugin/zoom-js/zoom.js', async: true },
+	{ src: 'plugin/notes/notes.js', async: true }
+	]
+	});
+	
+      </script>
+    </div>
+  </body>
+</html>
