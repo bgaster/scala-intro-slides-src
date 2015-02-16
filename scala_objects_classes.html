@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Introduction</title>
+    
+    <meta name="description" content="Introduction to Scala for new programmers">
+    <meta name="author" content="Benedict R. Gaster">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+    <link rel="stylesheet" href="resources/template.css" id="template">
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    
+    <!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+  </head>
+  
+  <body>
+    
+    <div class="reveal">
+      
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section data-state="uwe-front-matter">
+	  <h1>Objects and Classes</h1>
+	  <p>
+	    <small><a href="http://benedict.gaster.org">Benedict R. Gaster</a> / <a href="http://twitter.com/cuberoo_">@cuberoo_</a></small>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Objects</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/object_examples.png" alt="Values and Variables"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Objects</h2>
+
+	  <ul>
+	    <li>Classification of features
+	      <ul>
+		<li>Assocate data , often called attributes, that provide characteristics</li>
+		<li>Assocate functions, often called methods, that provide behaviour</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Objects - Person</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/person-outline.png" alt="Values and Variables"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Attributes</h2>
+	  <ul>
+	    <li>For a person might we know
+	      <ul>
+		<li>Name</li>
+		<li>Date of birth</li>
+		<li>Gender</li>
+		<li>Nationality</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Attributes have types</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+name        : String
+dob         : (Int,Int,Int)
+gender      : Gender
+nationality : Nation
+            </code>
+	  </pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Attributes are often objects too</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+gender      : Gender
+nationality : Nation
+            </code>
+	  </pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Methods (i.e. functions)</h2>
+	  <ul>
+	    <li>For a person might we be able to compute
+	      <ul>
+		<li>Get Name</li>
+		<li>Is pensioner</li>
+		<li>Is Female</li>
+		<li>Is European</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Classes</h2>
+	  <ul>
+	    <li>Abstract represention (description) of an object</li>
+	    <li>Group attributes and methods together</li>
+	    <li>Encapsulate data (attributes) and methods (behaviour)
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Classes are types too</h2>
+	  <p>A class definition in Scala introduces a new type</p>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class A {
+   // attributes are defined here
+   // methods are defined here
+}
+            </code>
+	  </pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Class Diagram</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/class-diagram.png" alt="Class Diagram Example"></center>
+	    </p>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Class Diagram</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/uml-class-diagram.png" alt="Class Diagram"></center>
+	    </p>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Encapsulation can control access to attributes and methods</h2>
+	  <ul>
+	    <li>Private (<font color="green">-</font> in UML): limits access to within the class itself</li>
+	    <li>Public (<font color="green">+</font> in UML): allows external access</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Class Diagram Private and Public Access</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/private_public_class_diagram.png" alt="Class Diagram"></center>
+	    </p>
+	</section>	
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Objects may share characteristics</h2>
+	  <p>
+	    <center><img width="650" height="500" src="./resources/object_examples.png" alt="Values and Variables"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Objects may share characteristics</h2>
+	  <p>
+	    <center><img width="650" height="500" src="./resources/object_sport_examples.png" alt="Values and Variables"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Objects may share characteristics</h2>
+	  <p>
+	    <center><img width="650" height="500" src="./resources/object_animal_example.png" alt="Values and Variables"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance</h2>
+	  <p>Passes knowledge "down" from one object to another</p>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance</h2>
+	  <p>An object may "inherit" characteristics and behaviour from another</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance</h2>
+	  <p>Creates a hierarchy of "inherited" characteristis and behaviours</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance - Example(s)</h2>
+	  <ul>
+	    <li>All students are people</li>
+	    <li>All children are people</li>
+	    <li>All workers are people</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance using Classes</h2>
+	  <p>Remember classes are abstract representations of objects, so</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance using Classes</h2>
+	  <p>If a class <font color="green">B</font> "inherits" functionality from a class <font color="green">A</font>, we say</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance using Classes</h2>
+	  <ul>
+	    <li><font color="green">B</font> is a subclass of <font color="green">A</font>, and</li>
+	    <li><font color="green">A</font> is a superclass of <font color="green">B</font></li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance refines encapsulation</h2>
+	  <ul>
+	    <li>Private (<font color="green">-</font> in UML): limits access to within the class itself</li>
+	    <li>Public (<font color="green">+</font> in UML): allows external access</li>
+	    <li><font color="red">Protected</font> (<font color="green">#</font> in UML): restricts access to subclasses</li>
+	  </ul>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance</h2>
+	  <ul>
+	    <li>Defines an "is a" relationship between subclass and superclass, e.g.
+	      <ul>
+		<li>object B "is a" object A</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>IS A Relationship</h2>
+	  <ul>
+	    <li>Is a relationship meaning a subclass inherits and extends functionality of some base (super)class</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance Class Diagram</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/inheritance_diagramAB.png" alt="Class Diagram Example"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance Class Diagram</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/inheritance_diagram.png" alt="Class Diagram Example"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance Example</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/inheritance_diagramPersonStudentChild.png" alt="Class Diagram Example"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>HAS A Relationship</h2>
+	  <ul>
+	    <li>Is a relationship meaning a class is using (contains) another class</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>HSA A Class Diagram</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/has_a_diagram.png" alt="Class Diagram Example"></center>
+	    </p>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>When to use IS A or HSA A?</h2>
+	  <ul>
+	    <li>If an object is a type of a more general class, then use "is a"</li>
+	    <li>If an object has a particular "feature", then use "has a"</li> 
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance Polymorphism</h2>
+	  <ul>
+	    <li>If <font color="green">B</font> is subclass of <font color="green">A</font>, then
+	      <ul>
+		<li>We can use an object of type <font color="green">B</font>, in any context that expects an <font color="green">A</font></li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance Polymorphism</h2>
+	  <ul>
+	    <li>A subclass <font color="green">B</font> can overide methods of a superclass <font color="green">A</font></li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>2D Shapes</h2>
+	  <ul>
+	    <li>Shapes share many of the same attributes, e.g.
+	      <ul>
+		<li>position</li>
+		<li>color</li>
+	      </ul>
+	    <li>Shapes all have a visual representation, however
+	      <ul>
+		<li>visually they look different</li>
+		<li>the algorithm for drawing a circle is not the same as that for a square</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance Example</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/virtual_inheritance_diagram.png" alt="Class Diagram Example"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Abstract Classes</h2>
+	  <ul>
+	    <li>A class <b>without</b> one or more method implementations, e.g.
+	      <ul>
+		<li>
+		  An abstract shape class might provide a method for
+		  drawing shapes, but only specific inherited shapes,
+		  e.g. square, can define the specific behaviour
+		  (algroithm)
+		</li>
+	      </ul>
+	    </li>
+	    <li>
+	      Java calls these <b>interfaces</b>
+	      <ul>
+		<li>Sadly this is a very overloaded term!</li>
+	      </ul>
+	    </li>
+	    <li>Scala calls these <b>traits</b>
+	      <ul>
+		<li>Lots more on this later in the course</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>In Summary</h2>
+	  <ul>
+	    <li>Object-oriented programming provides a powerful model for developing applications</li>
+	    <li>Objects provide for:
+	      <ul>
+		<li>Encapsulationm, which helps enforces modularity</li>
+		<li>Inheritance, enabling the passing of knowlege, which in turn provide reuse</li>
+		<li>Inheritance Polymorphim, which provides the abilty to specialize "common" functionality</li> 
+	      </ul>
+	    </li>
+	  </ul>
+	</section>	
+	
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+
+      <script>
+	
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
+	
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+	
+	// Optional reveal.js plugins
+	dependencies: [
+	{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+	{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+	{ src: 'plugin/zoom-js/zoom.js', async: true },
+	{ src: 'plugin/notes/notes.js', async: true }
+	]
+	});
+	
+      </script>
+    </div>
+  </body>
+</html>
