@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Introduction</title>
+    
+    <meta name="description" content="Introduction to Scala for new programmers">
+    <meta name="author" content="Benedict R. Gaster">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+    <link rel="stylesheet" href="resources/template.css" id="template">
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    
+    <!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+  </head>
+  
+  <body>
+    
+    <div class="reveal">
+      
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section data-state="uwe-front-matter">
+	  <h1>Implementing Classes</h1>
+	  <p>
+	    <small><a href="http://benedict.gaster.org">Benedict R. Gaster</a> / <a href="http://twitter.com/cuberoo_">@cuberoo_</a></small>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Classes</h2>
+	  <ul>
+	    <li>A description of a common properties (attributes and methods) of a set of objects</li>
+	    <li>A concept</li>
+	    <li>Class is defined as part of a Scala program</li>
+	    <li>Examples include: Person, Car, Planet</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Objects</h2>
+	  <ul>
+	    <li>A representation of the properties of a single instance of a class</li>
+	    <li>An object is part of a programs data and its execution</li>
+	    <li>Examples include: Earth, Mars, and Barack obama
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>What's the connection between Objects and Classes</h2>
+	  <ul>
+	    <li>In object-oriented programming we write classes
+	      <ul>
+		<li>They are static, defined in the source code</li>
+		<li>There is just one defintion for each class</li>
+	      </ul>
+	    </li>
+	    <li>Objects are create from classes
+	      <ul>
+		<li>They are created dynaically</li>
+		<li>We say a particular object is an instance of a given class</li>
+	      </ul>
+	    </li>
+	    <li>A classs contains the "instructions" for how an object will behave</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Person Class Diagram</h2>
+	    <p>
+	      <center><img width="650" height="500" src="./resources/uml-person-scala.png" alt="Class Diagram Example"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Person Scala</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class Person(name : String, dob : Date, gender : Gender) {
+   def getName() : String = name
+   def getGender() : Gender = gender
+}
+            </code>
+	  </pre>	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>For a person class we have</h2>
+	  <ul>
+	    <li>An implict default constructor</li>
+	    <li>Data local to any instance of Person</li>
+	    <li>Implict instance data declarations
+	  </ul>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Constructors</h2>
+	  <ul>
+	    <li>Constructors are used to create objects from classes
+	      <ul>
+		<li>If we want to provide data at object creation, then we pass these values to a constructor</li>
+		<li>In Scala a <b>primary</b> constructor is a classes body and argument list</li> 
+	      </ul>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class A(/* classes argument list */) {
+    // body of class primary constructor
+}
+            </code>
+	  </pre>	      
+	    </li>	    
+	    <li>Every class has at least one constructor, its primary constructor</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Creating instances of classes, i.e. objects</h2>
+	  <ul>
+	    <li> Use the <b>new</b> keyword to create a new instance of a class</li>
+	    <li> In general, new ClassName(argument1, ..., argumentN)
+	  </ul>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+new Person("Ben", new Date(1,"Feburary", 1968), new Male())
+            </code>
+	  </pre>	      
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Primary Construtor</h2>
+	  <ul>
+	    <li>Arguments create attributes internal to class</li>
+	    <li>Private access, i.e. not accessable from outside of class or by subclasses</li>
+	  </ul>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class Foo(s : String)
+
+val f : Foo = new Foo("hello, you!")
+res2: Foo = Foo@45fa80c
+f.s
+console:10: error: value s is not a member of Foo
+            </code>
+	  </pre>	      	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Primary Constructor</h2>
+	  <ul>
+	    <li>If we want to have public access to constructor arguments, then
+	      <ul>
+		<li>we create public attributes, initialized to constructor arguments</li>
+	      </ul>
+	    </li>
+	  </ul>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class Foo(s : String) {
+   val str : String = s	      
+
+val f : Foo = new Foo("hello, you!")
+res2: Foo = Foo@45fa80c9
+f.str
+res1: String = hello
+            </code>
+	  </pre>	      	  
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Constructors can be many</h2>
+	  <ul>
+	    <li>It is possible to have many additional constructors 
+	      <ul>
+		<li>Called auxiliary constructors
+		<li>Each auxiliary constructor is named with the keyword <b>this</b> and has a different set of arguments</li>
+	      </ul>
+	    </li>	    
+	    <li>Consider the Date type
+	      <ul>
+		<li>By default it uses the United Kingdon's date format</li>
+		<li>But it is equally valid to use USA's date format</li>
+	      </ul>
+	    </li>
+	  </ul>
+	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Creating instances of Date</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+new Date(1,"Feburary", 1968)) // allowed
+
+new Date("Feburary", 1, 1968)) // not (currently) allowed	      
+            </code>
+	  </pre>	      
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Multiple Constructors for Date</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class Dates(d : Int, m : String, y: Int) {
+  def this(m : String, d : Int, y : Int) = this(d, m, y)
+  // other methods
+}	    
+            </code>
+	  </pre>	  
+	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance</h2>
+	  <ul>
+	    <li>An object may "inherit" characteristics and behaviour from another</li>
+	    <li>Subclass <b>B</b> inherits from a superclass <b>A</b> using the keyword <b>extends</b></li>
+	  </ul>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class B extends A {
+  // data and methods for B go here
+}
+            </code>
+	  </pre>	  	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance Example - Child Is A Person</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class Child(name : Name, dob : Date, gender : Gender, school : String)
+      extends Person(name,dob,gender) 
+            </code>
+	  </pre>
+	  <ul>
+	    <li>Pass constructor arguments to superclass, e.g:
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+extends Person(name,dob,gender) 
+            </code>
+	  </pre>
+	  </li>
+	  </ul>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Inheritance allows overriding methods</h2>
+	  <ul>
+	    <li>A subclass can override a superclasses' method using the keyword <b>override</b></li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Overridable display method for Person</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class Person(name : Name, dob : Date, gender : Gender) {
+  def getName() : String = name
+  def getGender() : Gender = gender
+
+  def display() : Unit = {
+    println(name)
+    gender.display()
+  }
+}
+            </code>
+	  </pre>	  	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Overrides the display method</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+  class Child(name : Name, dob : Date, gender : Gender, school : String)
+      extends Person(name,dob,gender) {
+
+    override def display() : Unit = {
+      super.display()
+      println(school)
+    }
+  }
+            </code>
+	  </pre>	  	  
+	  <ul>
+	    <li>A subclass can override refer to superclasses' "overridden" method using the keyword <b>super</b></li>
+	  </ul>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Abstract classes</h2>
+	  <ul>
+	    <li>A class <b>without</b> one or more method implementations, e.g.
+	      <ul>
+		<li>
+		  An abstract Gender class might provide methods for
+		  both genders, but only specific inherited genders,
+		  e.g. women, can define the specific behaviour
+		  (for example, type of chromosomes)
+		</li>
+	      </ul>
+	    </li>
+	    <li>
+	      Java calls these <b>interfaces</b>
+	      <ul>
+		<li>Sadly this is a very overloaded term!</li>
+	      </ul>
+	    </li>
+	    <li>Scala calls these <b>abstract classes</b>
+	      <ul>
+		<li>Lots more on this later in the course</li>
+	      </ul>
+	    </li>
+	  </ul>	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Abstract class for representing Gender</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+abstract class Gender {
+  def isMale() : Boolean
+  def isFemale() : Boolean
+}
+            </code>
+	  </pre>	  
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Gender Female</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class Female extends Gender {
+   override def isMale() : Boolean = false
+   override def isFemale() : Boolean = true
+}
+            </code>
+	  </pre>	  
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Gender Female</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+class Male extends Genders {
+   override def isMale() : Boolean = true
+   override def isFemale() : Boolean = false
+}
+            </code>
+	  </pre>	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Avoid implementing isMale when female</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+abstract class Gender {
+  def isMale() : Boolean = false
+  def isFemale() : Boolean = false
+}
+
+class Females extends Genders {
+  override def isFemale() : Boolean = true
+}
+
+            </code>
+	  </pre>	  
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Alternatives</h2>
+	  <p>But what can we do with this expressiveness?</p>
+	</section>	
+
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Alternatives</h2>
+	  <li>Using isMale() and isFemale() allows development of
+	  algroithms that depend on this knownlege, but work for all
+	  people </li>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Problem statement</h2>
+	  <ul>
+	    <ti>Given a list of people, write functions to
+	      <ul>
+		<ti>calulate the number of men</ti>
+		<ti>calculate the number of women</ti>
+	      </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>How many women</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def calNumberOfWomen(ps : List[Person]) : Int = {
+  var f : Int = 0
+
+  for (p <- ps) {
+     ... // what should we put here?
+  }
+	    
+  f
+}     
+            </code>
+	  </pre>	  
+
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>How many women</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+... // what should we put here?
+            </code>
+	  </pre>	  
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Get gender for particualar person</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+val g = p.getGender()
+... // what should we put here?
+            </code>
+	  </pre>	  
+	</section>	
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Simply Ask if female</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+val g = p.getGender()
+if (g.isFemale())
+   f = f + 1
+            </code>
+	  </pre>	  
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Complete implementation</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def calNumberOfWomen(ps : List[Person]) : Int = {
+  var f : Int = 0
+
+  for (p <- ps) {
+    val g = p.getGender()	  
+    if (g.isFemale())
+      f = f + 1
+  }
+	    
+  f
+}     
+            </code>
+	  </pre>	  
+
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Scalalizing a little</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def calNumberOfWomen(ps : List[Person]) : Int = {
+  var f : Int = 0
+
+  for (p <- ps if p.getGender().isFemale()) 
+      f = f + 1
+	    
+  f
+}     
+            </code>
+	  </pre>	  
+
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>And a little more</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def calNumberOfWomen(ps : List[Person]) : Int =
+   ps.foldRight(0)
+               ((n,f) => if (g.getGender().isFemale()) f + 1 else f)     
+            </code>
+	  </pre>
+	  <p>We will come back to this later in the course!</p>
+	</section>	
+	
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Case Classes or Pattern Matching</h2>
+	  <ul>
+	    <ti>A common pattern is to perform a different task for each type of class in a hierarchy</ti>
+	    <ti>Scala provides special syntax and functionality to make this easier</ti>
+	    <ti>using the <b>case</b> keyword when defining classes enables pattern matching
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Abstract class for representing Gender with pattern matching</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+abstract class Gender
+case class Female() extends Gender
+case class Male()   extends Gender 
+            </code>
+	  </pre>	  
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Matching against a case calss</h2>
+	  <ul>
+	    <li>Using the <b>match</b> construct we can pattern match against alternative subclasses
+	  </ul>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def isFemale( g : Gender ) : Boolean =
+   g match {
+      case Female() => true
+      case Male()   => false		
+   }
+            </code>
+	  </pre>	  
+	</section>		
+
+
+	<section data-state="uwe-background-matter">
+	  <h2>Number of women using pattern matching</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+  def calNumberOfMaleFemale(ps : List[Person]) : (Int,Int) = {
+    var f : Int = 0
+    for (p <- ps)
+      p.getGender() match {
+        case Male()  => ()
+        case Female() => f = f + 1
+      }
+    f
+  }
+            </code>
+	  </pre>	  
+	</section>	
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Or Using our isFemale predicate</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def calNumberOfWomen(ps : List[Person]) : Int = {
+  var f : Int = 0
+  for (p <- ps if isFemale(p.getGender())) 
+      f = f + 1
+	    
+  f
+}     
+            </code>
+	  </pre>	  
+
+	  <ul>
+	    <li>Notice how we are now using the "functional" style of <b>isFemale(...)</b>
+	    <li>Scala's ability to mix functional programming and object-oriented programming, is very powerful!</b>
+	  </ul>
+	</section>	
+
+	
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+
+      <script>
+	
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
+	
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+	
+	// Optional reveal.js plugins
+	dependencies: [
+	{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+	{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+	{ src: 'plugin/zoom-js/zoom.js', async: true },
+	{ src: 'plugin/notes/notes.js', async: true }
+	]
+	});
+	
+      </script>
+    </div>
+  </body>
+</html>
