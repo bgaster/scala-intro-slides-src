@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Introduction</title>
+    
+    <meta name="description" content="Introduction to Scala for new programmers">
+    <meta name="author" content="Benedict R. Gaster">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+    <link rel="stylesheet" href="resources/template.css" id="template">
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    
+    <!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+  </head>
+  
+  <body>
+    
+    <div class="reveal">
+      
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section data-state="uwe-front-matter">
+	  <h1>Arrays and A simple 2D Graphics Library</h1>
+	  <p>
+	    <small><a href="http://benedict.gaster.org">Benedict R. Gaster</a> / <a href="http://twitter.com/cuberoo_">@cuberoo_</a></small>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>2D Graphics Library</h2>
+	  <ul>
+	    <li>Represents a scene of 2D objects</li>
+	    <li>Renders (displays) the scene on the console</li>
+	    <li>Capable of drawing:
+	      <ul>
+		<li>Line( x0, y0, x1, y1, color)</li>
+		<li>Square( x, y, size, color)</li>
+		<li>Square( x, y, size, color)</li>
+		<li>Rectangle( x, y, width, height, color)</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Our final result</h2>
+	    <p>
+	      <center><img width="800" height="600" src="./resources/2dscene_snapshot.png" alt="Rendered Scene"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Scala functionlity we are going to use</h2>
+	  <ul>
+	    <li>Base types (<b>Int</b>) - lecture 02</li>
+	    <li>For loops and conditionals - lecture 02</li>
+	    <li>Objects - lectures 03 and 04</li>
+	    <li>Classes with inheritance - lectures 03 and 04</li>
+	    <li>Arrays - today's lecture</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>What is an Array</h2>
+	  <p>
+	    A collection of <b>things</b> of the same type
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Visually an Array looks like</h2>
+	  <p>
+	    <center><img width="800" height="100" src="./resources/array_layout1.png" alt="Array Visually"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Number of elements in array</h2>
+	  <ul>
+	    <li>An array has a fixed number of elements</li>
+	    <li>For example, a 4 element array of characters:</li>
+	  </ul>
+	  <p>
+	    <center><img width="800" height="100" src="./resources/array_layout2.png" alt="Array 4 elements"></center>
+	  </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Accessing an array</h2>
+	  <ul>
+	    <li>An array is accessed
+	      <ul>
+		<li>from left to right</li>
+		<li>first element has an index of 0</li>
+		  <li>last element has an index of (N-1), where N is the number of elements</li>
+	      </ul>
+	    </li>
+	  </ul>
+	  <p>
+	    <center><img width="800" height="250" src="./resources/array_layout3.png" alt="Accessing an Array"></center>
+	  </p>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Arrays in Scala</h2>
+	  <ul>
+	    <li>Array class</li>
+	    <li>type of elements contained in an array</li>
+	    <li>number of elements contained in an array</li>
+	    <li>general form looks like this</li>
+	  </ul>
+	  <pre><code class="scala" data-trim contenteditable>
+Array[ type ](size)      
+	  </code></pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Array Definition Examples</h2>
+	  <pre><code class="scala" data-trim contenteditable>
+var x = Array[Int](100)     // x coordinates in 2D point
+var y : Array[Int](100])    // y coordinate in 2D point
+var name = Array[Int](256)  // person's name, array of charaters
+	  </code></pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Array access</h2>
+	  <pre><code class="c" data-trim contenteditable>
+x(3)       // access the forth element of x
+y(0)       // access the third element of y	      
+name(256); // access the 257 element of name, ERROR as name only has 256 elements!!	      
+	  </code></pre>
+	  <ul>
+	    <li>Access to an element NOT in an array is said to be out of bounds!</li>
+	    <li>Out of bounds access will raise a runtime exception!</li>
+	  </ul>	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Use loops to access multiple elements</h2>
+	  <pre><code class="scala" data-trim contenteditable>
+def drawPoints(x : Array[Int], y : Array[Int]) { 
+   for (i <- 0 until x.length)
+       drawPoint(x(i), y(j))
+}		   
+	  </code></pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Alternatively</h2>
+	  <pre><code class="scala" data-trim contenteditable>
+def drawPoints(x : Array[Int], y : Array[Int]) { 
+  for {
+    i <- 0 until x.length)
+  } drawPoint(x(i), y(j))
+}		   
+	 </code></pre>
+
+	  <ul>
+	    <li>Why use this approach?</li>
+	  </ul>
+	</section>	
+
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Multiple Dimensional Arrays</h2>
+	  <ul>
+	    <li>No direct support multi-dimensional arrays, but
+	      <ul>
+		<li>Provides various methods to process arrays in any dimension</li>
+		<li>For example, the following might define a two-dimensional array for our screen</li>
+	      </ul>
+	    </li>
+	  </ul>
+	  <pre><code class="scala" data-trim contenteditable>
+ var screen = Array.ofDim[Color.ColorT](width,height)
+
+// Color.ColorT is the type of colors
+// width and height are the size of our screen in "pixels"     
+	  </code></pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Array access for multi dimensions</h2>
+	  <pre><code class="c" data-trim contenteditable>
+screen(3)(2)  // accesses column 4 (in X dimension) and
+	      // row 4 (in Y dimension)
+	  </code></pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Accessing lenght of each dimension</h2>
+	  <pre><code class="c" data-trim contenteditable>
+scala> val a = Array.ofDim[Int](2,3)
+a: Array[Array[Int]] = Array(Array(0, 0, 0), Array(0, 0, 0))
+
+scala> a.length // length of 1st dimension
+res3: Int = 2
+
+scala> a(0).length // length of 2nd dimension
+res4: Int = 3
+	  </code></pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Loops again - multiple for loops</h2>
+	  <pre><code class="scala" data-trim contenteditable>
+def display(screen : Array[Array[Color.ColorT]]) { 
+  for (i <- 0 until screen.length)
+    for (j <- 0 until screen(0).length) 
+      drawPoint(screen(i)(j))
+}		   
+	 </code></pre>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Loops again - alternative</h2>
+	  <pre><code class="scala" data-trim contenteditable>
+def display(screen : Array[Array[Color.ColorT]]) { 
+  for {
+    i <- 0 until screen.length
+    j <- 0 until screen(0).length
+  } drawPoint(screen(i)(j))
+}		   
+	 </code></pre>
+	</section>
+
+
+	<section data-state="uwe-background-matter">
+	  <h2>2D Graphics Library</h2>
+	    <p>
+	      <center><img width="800" height="550" src="./resources/console2D-UML.png" alt="Rendered Scene"></center>
+	    </p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Drawing our sample scene</h2>
+	  <pre><code class="scala" data-trim contenteditable>
+// create a new scene
+var scene = new Scene()
+
+// draw a couple of overlapping squares
+scene.push(new Square(2,2,3,Color.red))
+scene.push(new Square(4,1,2,Color.green))
+
+// draw a line
+scene.push(new Line(6,10,15,20, Color.blue))
+
+// draw a rectangle
+scene.push(new Rectangle(1,6,7,2,Color.blue))	      
+	 </code></pre>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Renderering our sample scene</h2>
+	  <pre><code class="scala" data-trim contenteditable>
+// Setup the display
+val screen = new Screen(20,20)
+screen.setBackground(Color.black)
+	      
+scene.render(screen)
+
+// Finally make the screen visible
+screen.display()	      
+	 </code></pre>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	    <h2>Source Code</h2>
+	    <ul>
+	      <li>Contained in the introduction examples on github!
+		<ul>
+		  <li><a href="https://github.com/bgaster/scala-intro">https://github.com/bgaster/scala-intro</a></li>
+		</ul>
+	      </li>
+	    </ul>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Exercises</h2>
+	  <ol>
+	    <li>Implement a method to draw a rectangle of a given length and height at point x,y</li>
+	    <li>Reimplement the library to use a class to represent points</li>
+	    <li>Reimplement the <b>draw</b> method for square and rectangle interms of <b>Line</b>
+	      <ul>
+		<li>What do you notie about this approach?</li>
+	      </ul>
+	    </li>
+	    <li>
+	      Modify the <b>Screen</b> class to use the length
+	      method of the <b>screen</b> array, rather
+	      than <b>width</b> and <b>height</b>
+	    </li>
+	    <li>Extend the library to support rendering text</li>
+	  </ol>
+	</section>
+	
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+
+      <script>
+	
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
+	
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+	
+	// Optional reveal.js plugins
+	dependencies: [
+	{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+	{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+	{ src: 'plugin/zoom-js/zoom.js', async: true },
+	{ src: 'plugin/notes/notes.js', async: true }
+	]
+	});
+	
+      </script>
+    </div>
+  </body>
+</html>
