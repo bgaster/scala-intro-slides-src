@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Introduction</title>
+    
+    <meta name="description" content="Introduction to Scala for new programmers">
+    <meta name="author" content="Benedict R. Gaster">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+    <link rel="stylesheet" href="resources/template.css" id="template">
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    
+    <!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+  </head>
+  
+  <body>
+    
+    <div class="reveal">
+      
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section data-state="uwe-front-matter">
+	  <h1>Recursion and Data Structures</h1>
+	  <p>
+	    <small><a href="http://benedict.gaster.org">Benedict R. Gaster</a> / <a href="http://twitter.com/cuberoo_">@cuberoo_</a></small>
+	  </p>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Introduction </h2>
+	  <p>As we have already seen many functions can be expressed in terms of loops</p>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def sum ( is : List[Int] ) : Int = {
+  var total = 0
+  for (i <- is) {
+    total = total + i
+  }
+  total
+}
+            </code>
+	  </pre>
+	  <p>Sums the elements of a list: e.g. sum(List(1,2,3,4)) = 10</p>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Product </h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def product ( is : List[Int] ) : Int = {
+  var total = 1
+  for (i <- is) {
+    total = total * i
+  }
+  total
+}
+            </code>
+	  </pre>
+	  <p>The product of a list: e.g. product(List(1,2,3,4)) = 24</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Recursion </h2>
+	  <p>In many programming languages functions can be defined in
+	    terms of themselves. Such functions are called recursive.</p>
+
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def sum ( is : List[Int] ) : Int =
+  if (is.length == 0)
+    0
+  else
+    is.head + sum(is.tail)
+            </code>
+	  </pre>
+	  <ul>
+	    <li>sum maps the empty list to 0 (the unit of +).</li>
+	    <li>and the head of a non-empty list is added to the remainder of the list.</li> 
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Pattern Matching</h2>
+	  <p>Like Java, Scala allows "matching" (switch in Java)
+	    against integers with <b>match</b> expressions</p>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def toYesOrNo(choice: Int): String = choice match {
+  case 1 => "yes"
+  case 0 => "no"
+  case _ => "error"
+}
+            </code>
+          </pre>
+          <p>If input is 1 return "yes", else if input is 0 return "no", otherwise return "error"</p>
+	</section>
+
+        <section data-state="uwe-background-matter">
+	  <h2>Pattern Matching on Lists</h2>
+	  <p>Unlike Java, Scala allows pattern matching on (case) classes:</p>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def isEmpty(ls: List[Int]): Boolean = ls match {
+  case Nil    => true
+  case x : xs => false
+}
+            </code>
+          </pre>
+          <p>If input is Nil (empty list) return true, otherwise return false.</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Defining Recursive Functions with Pattern Matching </h2>
+	  <p>Combinding pattern matching and recursion is very powerful:</p>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+  def sum ( is : List[Int] ) : Int = is match {
+    case Nil            => 0
+    case i :: remainder => i + sum(remainder)
+  }
+            </code>
+	  </pre>
+	  <ul>
+	    <li>sum pattern matches the empty list (Nil), returning 0.</li>
+	    <li>sum pattern matches against the non-empty list (i ::
+	    remainder), returning i plus the sum of remainder.
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>We can define other functions </h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def product ( is : List[Int] ) : Int = is match {
+  case Nil            => 1
+  case i :: remainder => i * product(remainder)
+}
+            </code>
+	  </pre>
+	  <ul>
+	    <li>product pattern matches the empty list (Nil), returning 1.</li>
+	    <li>product pattern matches against the non-empty list (i ::
+	    remainder), returning i times the product of remainder.
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Relationship Between Sum and Product</h2>
+	  <p>Do you notice anything similar about sum and product?</p>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Relationship Between Sum and Product</h2>
+	  <ul>
+	    <li>sum pattern matches the empty list (<font color=red>Nil</font>), returning <font color=red>0</font>.</li>
+	    <li>sum pattern matches against the non-empty list (<font color=red>i ::
+	    remainder</font>), returning <font color=red>i plus the sum of remainder</font>.
+	  </ul>
+	  <HR>
+	  <ul>
+	    <li>product pattern matches the empty list
+	    (<font color=red>Nil</font>), returning <font color=red>1</font>.</li>
+	    <li>product pattern matches against the non-empty list (<font color=red>>i ::
+	    remainder</font>), returning <font color=red>i times the product of remainder</font>.
+	  </ul>	  
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>General recursive pattern over lists</h2>
+	  <ul>
+	    <li>Define a function <font color=green>R(f, unit, ls)</font>, where:
+	      <ul>
+		<li>f is a function of type (Int,Int) => Int</li>
+		<li>unit is of type Int</li>
+		<li>ls is of type List[Int]</li>
+	      </ul>
+	    </li>
+	    <li>Base case:
+	      <ul>
+		<li>
+		  pattern matches <font color=green>Nil</font>, then
+	          return a <font color=green>unit</font> value.
+		</li>
+	      </ul>
+	    </li>
+	    <li>Recursive case:
+	      <ul>
+		<li>
+		  pattern matches <font color=green>i ::
+		    remainder</font>, then apply
+		  function <font color=green>f</font>
+		  to <font color=green>i</font> and the result of a
+		  recursive call to <font color=green>R</font>.
+		</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Fold</h2>
+	  <p>R is often called <b>fold</b> for lists of integers.</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>A definition of fold for lists (of Ints)</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def fold ( f : (Int, Int) => Int, unit : Int, is : List[Int] ) : Int =
+  is match {
+    case Nil      => unit
+     case i :: is => f(i, foldList(f, unit, is))
+   }
+            </code>
+	  </pre>	  
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Implement Sum and Product with fold</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+val sum    = (xs : List[Int]) => foldList((x,y) => x + y,  0, xs)
+val prodct = (xs : List[Int]) => foldList((x,y) => x * y,  1, xs)	      
+            </code>
+	  </pre>	  
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Why is Recursion Useful?</h2>
+	  <ul>
+	    <li>Some functions, such as product, are simpler to
+	      define in terms of other functions.
+	    </li>
+	    <li>As we have already seen (e.g. fold) and will see more
+	      of, many functions are easier to define recursively
+	      interms of themselves.</li>
+	    <li>Many data-structures are defined recursively in terms
+	    of themselves, e.g. lists.</li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Fibonacci numbers</h2>
+	  <ul>
+	    <li>
+	      In mathematics, the Fibonacci number are the numbers in
+	      the following integer sequence
+	      <ul>
+		<li>$$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, \ldots$$</li>
+	      </ul>
+	    </li>
+	    <li>It can be defined by the following (recursive)
+	    mathematical definition:</li>
+	  </ul>
+	  <p>$$F_n = F_{n-1} + F_{n-2}$$ with seed values $$F_1 = 1\ and\ F_2 = 1$$</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Fibonacci in Scala</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+ def fib( n : Int) : Int = n match {
+  case 1 | 2 => n
+  case _ => fib( n-1 ) + fib( n-2 )
+ }
+            </code>
+	  </pre>	  
+	</section>
+
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Fibonacci in Scala</h2>
+	  <p>Our Scala definition is very similar to the mathematical one!</p>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+ def fib( n : Int) : Int = n match {
+  case 1 | 2 => n
+  case _ => fib( n-1 ) + fib( n-2 )
+ }
+            </code>
+	  </pre>
+	  <p>$$F_n = F_{n-1} + F_{n-2}$$ with seed values $$F_1 = 1\ and\ F_2 = 1$$</p>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Data Structures</h2>
+	  <ul>
+	    <li>A particular way of organizing data within a computer program</li>
+	    <li>We've already seen many examples there are many more:
+	      <ul>
+		<li>Lists</li>
+		<li>Array</li>
+		<li>Set</li>
+		<li>Queues</li>
+		<li>Hash Tables</li>
+		<li>Trees</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Objects</h2>
+	    <p>All objects are data-structures</p>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Data Structures are often recursive</h2>
+	  <p>Many data-structures are naturally expressed recursively</p>
+	  <p>We will look at one such data-structure: Trees.
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Trees</h2>
+	  <p>
+	    A widely used data-structure that simulates a hierarchical
+	    tree structure, with a root value and subtrees of children,
+	    represented as a set of linked nodes.
+	  </p>
+
+	  <p>
+	    <center><img width="600" height="300" src="./resources/abstract-binary-tree.gif" alt="Tree"></center>
+	  </p>
+
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Some Terminology</h2>
+	  <p>
+	    <center><img width="500" height="500" src="./resources/tree-terms.png" alt="Tree"></center>
+	  </p>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Why Use Trees</h2>
+	  <ul>
+	    <li>Reflect structural relationships in the stored data.</li>
+	    <li>Natural approach to representing hierarchies.</li>
+	    <li>Provide efficient insertion and searching.</li>
+	  </ul>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Binary Trees</h2>
+	  <ul>
+	    <li> A special and very common type of tree where each (parent)
+	      node has at most two childen.</li>
+	    <li>The children are refered to as the left and right child, respectively.</li>
+	  </ul>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Traversing Binary Trees</h2>
+	  <ul>
+	    <li> Depth-first
+	      <ul>
+		<li>Decend all the way down one path of the tree, then down the next and so on.</li>
+	      </ul>
+	    </li>
+	    <li> Breath-first
+	      <ul>
+		<li>Process each level of the tree before decending to the next level.
+	      </ul>
+	    </li>
+	  </ul>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Types of traversal</h2>
+	  <ul>
+	    <li> There are three approaches to implementing depth-first traversal:
+	      <ul>
+		<li>In-order; visit the left child, then the parent, and finally the right child.</li>
+		<li>Pre-order; visit the parent, then the left child, and finally the right child.</li>
+		<li>Post-order; visit the left child, then the right child, and finally the parent.</li>
+		<li>
+	      </ul>
+	    </li>
+	    <li> There is only a single approach to implementing breath-first traversal.</li>
+	  </ul>
+	</section>
+
+
+	<section data-state="uwe-background-matter">
+	  <h2>Tree Base Class (Scala Trait)</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+ trait Tree {
+   def toListInOrder    : List[Int]
+   def toListPreOrder   : List[Int]
+   def toListPostOrder  : List[Int]
+   def toListLevelOrder : List[Int]
+ }
+            </code>
+	  </pre>
+	</section>	
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Tree Base Class - In Order</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+trait Tree {
+  def toListInOrder : List[Int] = this match {
+    case Empty()     => Nil
+    case Leaf(v)     => v :: Nil
+    case Node(l,v,r) => l.toListInOrder ::: (v :: r.toListInOrder)
+  }	      
+  ...
+}
+            </code>
+	  </pre>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Tree Base Class - Pre Order</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+trait Tree {
+  def toListPreOrder : List[Int] = this match {
+      case Empty()     => Nil
+      case Leaf(v)     => v :: Nil
+      case Node(l,v,r) => v :: l.toListPreOrder ::: r.toListPreOrder
+   }
+   ...
+ }
+            </code>
+	  </pre>
+	</section>	
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Tree Base Class - Post order</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+trait Tree {
+   // Left as an exercise for the reader
+   ...
+ }
+            </code>
+	  </pre>
+	</section>	
+
+	<section data-state="uwe-background-matter">
+	  <h2>Binary Search Trees</h2>
+	  <ul>
+	    <li>Is a useful special case of binary trees.</li>
+	    <li>A binary Search Tree is a binary tree data
+	      structure where each node has a comparable value (key) and
+	      satisfies the restriction:
+	      <ul>
+		<li>
+		  that the key in any node is larger than the keys
+		  in all nodes in that node's left sub-tree and
+		  smaller than the keys in all nodes in that
+		  node's right sub-tree.
+		</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</section>
+
+	<section data-state="uwe-background-matter">
+	  <h2>Binary Search Trees - Insertion</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def insert( i : Int ) : Tree = this match {
+   case Empty() => Leaf(i)
+   case Leaf(v) => if (i < v)
+                     Node(Leaf(i), v, Empty())
+                   else if(i > v) 
+                     Node(Empty(), v, Leaf(i))
+                   else
+                     this
+   case Node(l,v,r) => if (i < v)
+                         // insert in left					    
+                         Node(l.insertOrdered(i), v, r)
+		       else if (i > v)
+                         // insert in right					    		  
+                         Node(l, v, r.insertOrdered(i))
+                       else
+                         // already in tree					    		  
+                         this
+}
+            </code>
+	  </pre>
+	</section>		
+
+	<section data-state="uwe-background-matter">
+	  <h2>Binary Search Trees - Example</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+scala> val t = List(2,6,100,84,23,1,2).
+	         foldRight(Empty() : Tree) ( (x, t) => t.insert(x) )
+t: Tree = Node(Leaf(1),2,Node(Leaf(6),23,Node(Empty(),84,Leaf(100))))
+
+scala> t.toListInOrder
+res2: List[Int] = List(1, 2, 6, 23, 84, 100)
+            </code>
+	  </pre>
+	</section>		
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Binary Search Trees</h2>
+	  <ul>
+	    <li>A tree built with <b>insert</b> is in sorted order when traversed <b>in order</b>.</li>
+	    <li>We can use this fact to implement function to sort the elements of a list.</li>
+	  </ul>
+	</section>
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Binary Search Trees - List Sort</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+def sort ( ls : List[Int] ) : List[Int] =
+  ls.foldRight(Empty() : Tree) ((x, t) => t.insert(x)).toListInOrder	      
+            </code>
+	  </pre>
+	</section>		
+	
+	<section data-state="uwe-background-matter">
+	  <h2>Conclusion</h2>
+	  <ul>
+	    <li>Pattern matching.</li>
+	    <li>Many functions can be defined in terms of themselves.</li>
+	    <li>Data-strucures are often defined by recursion.</li>
+	    <li>Binary trees and binary search trees are useful examples of
+	      recursive data-structures.</li>
+	  </ul>
+	</section>
+	
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+
+      <script>
+	
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
+
+	math: {
+          mathjax: './MathJax/MathJax.js',
+          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+	},
+	
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+	
+	// Optional reveal.js plugins
+	dependencies: [
+	{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+	{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+	{ src: 'plugin/zoom-js/zoom.js', async: true },
+	{ src: 'plugin/math/math.js', async: true },
+	{ src: 'plugin/notes/notes.js', async: true }
+	]
+	});
+	
+      </script>
+    </div>
+  </body>
+</html>
