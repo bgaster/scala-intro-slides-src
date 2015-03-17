@@ -230,7 +230,7 @@ def product ( is : List[Int] ) : Int = is match {
 def fold ( f : (Int, Int) => Int, unit : Int, is : List[Int] ) : Int =
   is match {
     case Nil      => unit
-     case i :: is => f(i, foldList(f, unit, is))
+     case i :: is => f(i, fold(f, unit, is))
    }
             </code>
 	  </pre>	  
@@ -240,8 +240,8 @@ def fold ( f : (Int, Int) => Int, unit : Int, is : List[Int] ) : Int =
 	  <h2>Implement Sum and Product with fold</h2>
 	  <pre>
 	    <code class="scala" data-trim contenteditabl>
-val sum    = (xs : List[Int]) => foldList((x,y) => x + y,  0, xs)
-val prodct = (xs : List[Int]) => foldList((x,y) => x * y,  1, xs)	      
+val sum    = (xs : List[Int]) => fold((x,y) => x + y,  0, xs)
+val prodct = (xs : List[Int]) => fold((x,y) => x * y,  1, xs)	      
             </code>
 	  </pre>	  
 	</section>
@@ -493,10 +493,10 @@ def insert( i : Int ) : Tree = this match {
                      this
    case Node(l,v,r) => if (i < v)
                          // insert in left					    
-                         Node(l.insertOrdered(i), v, r)
+                         Node(l.insert(i), v, r)
 		       else if (i > v)
                          // insert in right					    		  
-                         Node(l, v, r.insertOrdered(i))
+                         Node(l, v, r.insert(i))
                        else
                          // already in tree					    		  
                          this
