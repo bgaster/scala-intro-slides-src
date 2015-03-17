@@ -433,6 +433,18 @@ trait Tree {
 	</section>	
 
 	<section data-state="uwe-background-matter">
+	  <h2>Tree Sub Classes</h2>
+	  <pre>
+	    <code class="scala" data-trim contenteditabl>
+case class Leaf(v : Int) extends Tree
+case class Node(l : Tree, v : Int, r : Tree) extends Tree
+case class Empty() extends Tree
+            </code>
+	  </pre>
+	  <p>A <b>case class</b> supports pattern matching</p>
+	</section>	
+
+	<section data-state="uwe-background-matter">
 	  <h2>Tree Base Class - Pre Order</h2>
 	  <pre>
 	    <code class="scala" data-trim contenteditabl>
